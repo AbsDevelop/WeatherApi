@@ -1,7 +1,20 @@
 import { React } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, RefreshControl, SafeAreaViewComponent, ScrollView } from 'react-native';
+import Tempo from './components/Tempo';
+import Api from './components/Api';
+
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 export default function App() {
+  const [refresh, setRefresh] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefresh(true);
+    wait(2000).then(() => setRefresh(false));
+  }, []);
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -19,7 +32,8 @@ export default function App() {
         
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.textbtn}>Buscar</Text>
-      </TouchableOpacity>	          
+      </TouchableOpacity>	 
+      <Tempo/>         
     </View>
   );
 }
