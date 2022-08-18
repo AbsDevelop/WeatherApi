@@ -1,20 +1,18 @@
-import { React } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, RefreshControl, SafeAreaViewComponent, ScrollView } from 'react-native';
+import React, {useState}  from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import Tempo from './components/Tempo';
 import Api from './components/Api';
 
-const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
-
 export default function App() {
-  const [refresh, setRefresh] = React.useState(false);
+  const {data, setData} = useState();
+  const {cidade, setCidade} = useState();
 
-  const onRefresh = React.useCallback(() => {
-    setRefresh(true);
-    wait(2000).then(() => setRefresh(false));
-  }, []);
-  
+  async function buscaCep(){
+    const response = await Api.get('weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=e8c3e0cd&city_name=Peruibe,SP');
+    setDados(response.data.forecast[0]);
+    
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -25,15 +23,16 @@ export default function App() {
         source={{uri: 'https://cdn-icons-png.flaticon.com/512/2849/2849457.png',}}  
       />
 
-      <Text style={styles.textBlock}>Informação sua Cidade:</Text>
+      <Text style={styles.textBlock}>Informe sua Cidade:</Text>
       <TextInput style={styles.input}
         placeholder='Sua cidade...'
+        onKeyPress={buscaCep}
       />
         
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.textbtn}>Buscar</Text>
       </TouchableOpacity>	 
-      <Tempo/>         
+      <Tempo data={data}/>         
     </View>
   );
 }
