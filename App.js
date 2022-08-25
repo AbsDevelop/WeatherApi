@@ -4,13 +4,14 @@ import Tempo from './components/Tempo';
 import Api from './components/Api';
 
 export default function App() {
-  const {data, setData} = useState();
-  const {cidade, setCidade} = useState();
+  const [dados, setDados] = useState("");
+  const [dados2, setDados2] = useState("");
+  const [cidade, setCidade] = useState("");
 
   async function buscaCep(){
-    const response = await Api.get('weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=e8c3e0cd&city_name=Peruibe,SP');
+    const response = await Api.get(`weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=e8c3e0cd&city_name=${cidade}`);
     setDados(response.data.forecast[0]);
-    
+    setDados2(response.data);
   }
 
   return (
@@ -20,19 +21,22 @@ export default function App() {
       </Text>
 
       <Image style={styles.img}
-        source={{uri: 'https://cdn-icons-png.flaticon.com/512/2849/2849457.png',}}  
+        source={{uri: 'https://eusousolar.com.br/calculadora/img/sun.gif',}}  
+
+        //https://dribbble.com/shots/6193517-Weather-Icon-Set-Thunderstorm
       />
 
       <Text style={styles.textBlock}>Informe sua Cidade:</Text>
       <TextInput style={styles.input}
-        placeholder='Sua cidade...'
-        onKeyPress={buscaCep}
+        placeholder='Ex.: São Paulo, SP ou Minas Gerais, MG'
+        onChangeText={value=>setCidade(value)}
       />
         
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={buscaCep}>
         <Text style={styles.textbtn}>Buscar</Text>
       </TouchableOpacity>	 
-      <Tempo data={data}/>         
+      <Tempo data={dados} data={dados2}/>
+
     </View>
   );
 }

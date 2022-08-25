@@ -4,15 +4,13 @@ import { Text, StyleSheet } from 'react-native';
 export default function Tempo(props) {
  return (
    <>
-      <Text style={styles.text}>Temperatura: {props.data.temp}</Text>
+      
+
       <Text style={styles.text}>Máxima: {props.data.max}</Text>
       <Text style={styles.text}>Mínima: {props.data.min}</Text>
-      <Text style={styles.text}>Data: {props.data.date}</Text>
-      <Text style={styles.text}>Hora: {props.data.time}</Text>
+
       <Text style={styles.text}>Tempo: {props.data.description}</Text>
-      <Text style={styles.text}>Cidade: {props.data.city}</Text>
-      <Text style={styles.text}>Umidade: {props.data.humidity}</Text>
-      <Text style={styles.text}>Velocidade do Vento: {props.data.wind_speedy}</Text>
+        
    </>
   );
 }
@@ -26,6 +24,13 @@ const styles = StyleSheet.create({
     }
 });
 
-/* 
+/*    <Text style={styles.text}>Temperatura: {props.dados2.temp}</Text>
+
+      <Text style={styles.text}>Data: {props.dados2.date}</Text>
+      <Text style={styles.text}>Hora: {props.dados2.time}</Text>
+      
+      <Text style={styles.text}>Cidade: {props.dados2.city}</Text>
+      <Text style={styles.text}>Umidade: {props.dados2.humidity}</Text>
+      <Text style={styles.text}>Velocidade do Vento: {props.dados2.wind_speedy}</Text>
         
 */
