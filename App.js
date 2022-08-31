@@ -29,15 +29,15 @@ export default function App() {
 
       <Text style={styles.textBlock}>Informe sua Cidade:</Text>
       <TextInput style={styles.input}
-        placeholder='Ex.: São Paulo, SP ou Minas Gerais, MG'
-        onChangeText={value=>setCidade(value)}
+        placeholder='                Ex.: São Paulo, SP                '
+        onChangeText={data=>setCidade(data)}
       />
         
       <TouchableOpacity style={styles.btn} onPress={buscaCep}>
         <Text style={styles.textbtn}>Buscar</Text>
       </TouchableOpacity>	 
-      <Tempo dadosA={dadosA} dadosB={dadosB}
-      />
+      <Tempo dataA={dadosA}
+       dataB={dadosB} />
 
     </View>
   );
@@ -66,7 +66,9 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   input: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderWidth: 1,
+    textAlign: 'center'
   },
   textBlock: {
     fontSize: 20,

@@ -1,17 +1,19 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 
 export default function Tempo(props) {
  return (
    <>
-      Hoje:
-      <Text style={styles.text}>Máxima: {props.dataA.max}</Text>
-      <Text style={styles.text}>Mínima: {props.dataA.min}</Text>
-      <Text style={styles.text}>Tempo: {props.dataA.description}</Text>
-      Amanhã:
-      <Text style={styles.text}>Máxima: {props.dataB.max}</Text>
-      <Text style={styles.text}>Mínima: {props.dataB.min}</Text>
-      <Text style={styles.text}>Tempo: {props.dataB.description}</Text>   
+    <View style={styles.block}>
+          <Text style={styles.title}>Hoje:</Text>
+          <Text style={styles.text}>Máxima: {props.dataA.max}</Text>
+          <Text style=  {styles.text}>Mínima: {props.dataA.min}</Text>
+          <Text style={styles.text}>Tempo: {props.dataA.description}</Text>
+          <Text style={styles.title}>Amanhã:</Text>
+          <Text style={styles.text}>Máxima: {props.dataB.max}</Text>
+          <Text style={styles.text}>Mínima: {props.dataB.min}</Text>
+          <Text style={styles.text}>Tempo: {props.dataB.description}</Text>   
+    </View>
    </>
   );
 }
@@ -22,6 +24,18 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       marginLeft: '10%',
       marginBottom: 10
+    },
+    title:{
+      fontSize: 24,
+      fontStyle: 'italic',
+      fontWeight: 'bold'
+    },
+    block: {
+      marginTop: 5,
+      padding: 10,
+      paddingHorizontal: 40,
+      borderWidth: 1,
+      backgroundColor: 'white'
     }
 });
 
