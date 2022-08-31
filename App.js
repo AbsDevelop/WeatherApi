@@ -4,14 +4,14 @@ import Tempo from './components/Tempo';
 import Api from './components/Api';
 
 export default function App() {
-  const [dados, setDados] = useState("");
-  const [dados2, setDados2] = useState("");
+  const [dadosA, setDadosA] = useState("");
+  const [dadosB, setDadosB] = useState("");
   const [cidade, setCidade] = useState("");
 
   async function buscaCep(){
-    const response = await Api.get(`weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=e8c3e0cd&city_name=${cidade}`);
-    setDados(response.data.forecast[0]);
-    setDados2(response.data);
+    const response = await Api.get(`weather?array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date,description&key=ca53326e&city_name=${cidade}`);
+    setDadosA(response.data.forecast[0]);
+    setDadosB(response.data.forecast[0]);
   }
 
   return (
@@ -24,6 +24,7 @@ export default function App() {
         source={{uri: 'https://eusousolar.com.br/calculadora/img/sun.gif',}}  
 
         //https://dribbble.com/shots/6193517-Weather-Icon-Set-Thunderstorm
+        //https://github.com/Ema Suriano/weather-styled-icon
       />
 
       <Text style={styles.textBlock}>Informe sua Cidade:</Text>
@@ -35,7 +36,8 @@ export default function App() {
       <TouchableOpacity style={styles.btn} onPress={buscaCep}>
         <Text style={styles.textbtn}>Buscar</Text>
       </TouchableOpacity>	 
-      <Tempo data={dados} data={dados2}/>
+      <Tempo dadosA={dadosA} dadosB={dadosB}
+      />
 
     </View>
   );

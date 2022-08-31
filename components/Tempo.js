@@ -4,13 +4,14 @@ import { Text, StyleSheet } from 'react-native';
 export default function Tempo(props) {
  return (
    <>
-      
-
-      <Text style={styles.text}>Máxima: {props.data.max}</Text>
-      <Text style={styles.text}>Mínima: {props.data.min}</Text>
-
-      <Text style={styles.text}>Tempo: {props.data.description}</Text>
-        
+      Hoje:
+      <Text style={styles.text}>Máxima: {props.dataA.max}</Text>
+      <Text style={styles.text}>Mínima: {props.dataA.min}</Text>
+      <Text style={styles.text}>Tempo: {props.dataA.description}</Text>
+      Amanhã:
+      <Text style={styles.text}>Máxima: {props.dataB.max}</Text>
+      <Text style={styles.text}>Mínima: {props.dataB.min}</Text>
+      <Text style={styles.text}>Tempo: {props.dataB.description}</Text>   
    </>
   );
 }
@@ -24,7 +25,10 @@ const styles = StyleSheet.create({
     }
 });
 
-/*    <Text style={styles.text}>Temperatura: {props.dados2.temp}</Text>
+/*    
+      Link: "weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=ca53326e&city_name="
+      Blocos:
+      <Text style={styles.text}>Temperatura: {props.dados2.temp}</Text>
 
       <Text style={styles.text}>Data: {props.dados2.date}</Text>
       <Text style={styles.text}>Hora: {props.dados2.time}</Text>
