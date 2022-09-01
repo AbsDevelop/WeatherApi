@@ -13,7 +13,7 @@ export default function App() {
   async function buscaCep(){
     const response = await Api.get(`weather?array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=ca53326e&city_name=${cidade}`);
     setDadosA(response.data.forecast[0]);
-    setDadosB(response.data.forecast[0]);
+    setDadosB(response.data.forecast[1]);
     setDadosAS(response.data);
     setDadosBS(response.data);
   }
