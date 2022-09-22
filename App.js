@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native';
 import Tempo from './components/Tempo';
 import Api from './components/Api';
 
@@ -9,27 +9,25 @@ export default function App() {
   const [dadosAS, setDadosAS] = useState("");
   const [dadosBS, setDadosBS] = useState("");
   const [cidade, setCidade] = useState("");
+  const br = `\n`;
 
   async function buscaCep(){
-    const response = await Api.get(`weather?array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=ca53326e&city_name=${cidade}`);
-    setDadosA(response.data.forecast[0]);
+    const response = await Api.get(`weather?array_limit=10&fields=only_results,temp,city_name,forecast,max,min,date,time,description,city,humidity,wind_speedy%20&key=ca53326e&city_name=${cidade}`);
+    setDadosA(response.data.forecast);
     setDadosB(response.data.forecast[1]);
     setDadosAS(response.data);
     setDadosBS(response.data);
   }
 
   return (
-    <ScrollView style={styles.scrollView}>
+    
       <View style={styles.container}>
           <Text style={styles.title}>
             Previsão do Tempo
           </Text>
 
           <Image style={styles.img}
-            source={{uri: 'https://eusousolar.com.br/calculadora/img/sun.gif',}}  
-
-            //https://dribbble.com/shots/6193517-Weather-Icon-Set-Thunderstorm
-            //https://github.com/Ema Suriano/weather-styled-icon
+            source={{uri: 'https://eusousolar.com.br/calculadora/img/sun.gif',}}
           />
 
           <Text style={styles.textBlock}>Informe sua Cidade:</Text>
@@ -42,13 +40,29 @@ export default function App() {
             <Text style={styles.textbtn}>Buscar</Text>
           </TouchableOpacity>	 
           
+            {/* 
             <Tempo dataA={dadosA}
-            dataB={dadosB} 
-            dataAS={dadosAS}
-            dataBS={dadosBS} 
+              dataB={dadosB} 
+              dataAS={dadosAS}
+              dataBS={dadosBS} 
             /> 
+            */}
+
+            <FlatList
+              data={dadosA}
+              renderItem={({item}) => {
+                return(
+                  <View>
+                    <Text style={styles.date}>Data: {item.date}</Text>
+                    <Text>Max: {item.max}</Text>
+                    <Text>Min: {item.min}</Text>
+                    <Text>Descrição: {item.description}{br}</Text>
+                  </View> 
+                );
+              }}
+            />  
       </View>
-    </ScrollView>
+    
   );
 }
 
@@ -94,5 +108,8 @@ const styles = StyleSheet.create({
   textbtn: {
 	  fontSize: 20,
 	  textAlign: 'center'
+  },
+  date: {
+    fontWeight: 'bold'
   }
 });
